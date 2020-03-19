@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <title>Train Schedule</title>
+</head>
+<body class="grey lighten-3">
+
+  <!-- NAVBAR -->
+  <nav class="z-depth-0 grey lighten-4">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">
+        <img src="img/train.jpg" style="width: 180px; height: 60px;">
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+ 
+          <li class="logged-in">
+            <a href="#" class="grey-text" id="logout">Logout</a>
+          </li>
+          <li class="logged-out">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+          </li>
+          <li class="logged-out">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+          </li>
+        </span>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up</h4><br />
+      <form id="signup-form">
+        <div class="input-field">
+          <input type="email" id="signup-email" required />
+          <label for="signup-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Choose password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4><br />
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+  <!-- GUIDE LIST -->
+  <div class="container" style="margin-top: 40px;">
+    <br>
+
+    <!-- Jumbotron Title -->
+    <div class="jumbotron">
+      <h1 class="text-center">Anytime is Train Time</h1>
+      <h3 class="text-center">Choo Choo. Chee Chee.</h3>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+         
+    <table id="trTable" class="table">
+        <thead>
+          <tr>
+            <th scope="col" id="tbName">Train Name</th>
+            <th scope="col" id="tbRole">Destination</th>
+            <th scope="col" id="tbDttm">Frequency</th>
+            <th scope="col" id="tbMonth">Next Arrival</th>
+            <th scope="col" id="tbRate">Minutes Away</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Make Your Bid -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            Add Train
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group row">
+                <label for="train-name">Train Name</label>
+                <input class="form-control" id="train-name" type="text">
+              </div>
+              <div class="form-group row">
+                <label for="train-dest">Destination</label>
+                <input class="form-control" id="train-dest" type="text">
+              </div>
+              <div class="form-group row">
+                <label for="train-startDTTM">First Train Time (HH:mm - military time)</label>
+                <input class="form-control" id="train-startDTTM" type="text">
+              </div>
+              <div class="form-group row">
+                <label for="train-freq">Frequency (min)</label>
+                <input class="form-control" id="train-freq" type="number">
+              </div>
+              <button class="btn btn-primary" id="submit-emp" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-database.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDvdJuH7joeNNQ6zGEVUkpw7tprWt7ryek",
+    authDomain: "trainschedule-93d9c.firebaseapp.com",
+    databaseURL: "https://trainschedule-93d9c.firebaseio.com",
+    projectId: "trainschedule-93d9c",
+    storageBucket: "trainschedule-93d9c.appspot.com",
+    messagingSenderId: "503338779333",
+    appId: "1:503338779333:web:67f09a6622b734fee0e6ac"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+//make auth and firestore references
+const auth = firebase.auth();
+const database = firebase.database();
+
+</script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/index.js"></script>
+</body>
+</html>
